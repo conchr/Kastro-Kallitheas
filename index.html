@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Το Κάστρο της Καλλιθέας: Ένας Οχυρωμένος Θησαυρός</title>
+    <!-- Φόρτωση Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Φόρτωση Inter Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+        
+        :root {
+            font-family: 'Noto Serif', serif;
+        }
+        
+        /* Paper texture background */
+        body {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"), 
+                        linear-gradient(to bottom, #f5f1e6, #e8dfca);
+            background-attachment: fixed;
+            color: #2c1810;
+        }
+        
+        /* Welcome Screen Styles */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(205, 190, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(205, 190, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(205, 190, 160, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(245, 241, 230, 0.95), rgba(232, 223, 202, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #2c1810;
+            z-index: 100;
+            transition: opacity 0.8s ease-in-out;
+            box-shadow: inset 0 0 100px rgba(140, 110, 90, 0.1);
+        }
+        
+        #start-btn {
+            background-color: #8c6e5a;
+            color: #f5f1e6;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 1.25rem;
+            border: 2px solid #6d5340;
+        }
+        
+        #start-btn:hover {
+            background-color: #6d5340;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s ease-in-out;
+            color: #2c1810;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(205, 190, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(205, 190, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(205, 190, 160, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(245, 241, 230, 0.95), rgba(232, 223, 202, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            box-shadow: inset 0 0 100px rgba(140, 110, 90, 0.1);
+            overflow: hidden;
+        }
+        
+        .slide-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 2rem 2rem;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(140, 110, 90, 0.3);
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .municipality-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #6d5340;
+        }
+        
+        .slide-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 1rem 0;
+        }
+        
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #6d5340;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid #cdbea0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #8c6e5a;
+        }
+        
+        .slide-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #2c1810;
+        }
+        
+        .slide-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(140, 110, 90, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .center-button {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        /* Enhanced image styling */
+        .slide-image {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(140, 110, 90, 0.3);
+            max-width: 100%;
+            max-height: 50vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .slide-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Enhanced list styling */
+        .slide-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .slide-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .slide-list li:before {
+            content: "•";
+            color: #8c6e5a;
+            position: absolute;
+            left: 0;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        
+        /* Navigation buttons */
+        .nav-btn {
+            background-color: #8c6e5a;
+            color: #f5f1e6;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid #6d5340;
+            font-size: 1.25rem;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background-color: #6d5340;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .center-btn {
+            background-color: #8c6e5a;
+            color: #f5f1e6;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid #6d5340;
+            font-size: 1.25rem;
+            margin: 0 auto;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .center-btn:hover {
+            background-color: #6d5340;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Media Queries for Responsiveness */
+        
+        /* Smartphones */
+        @media (max-width: 640px) {
+            .slide-content {
+                padding: 0.5rem 1rem 1rem;
+            }
+            
+            .slide-title {
+                font-size: 1.75rem;
+                text-align: center;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.25rem;
+                text-align: center;
+            }
+            
+            .slide-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .nav-btn, .center-btn {
+                padding: 10px 16px;
+                font-size: 1rem;
+            }
+            
+            #start-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            
+            .municipality-text {
+                font-size: 1rem;
+            }
+            
+            .slide-image {
+                max-height: 40vh;
+            }
+        }
+        
+        /* Tablets and small laptops */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.75rem;
+            }
+            
+            .slide-text {
+                font-size: 1.25rem;
+            }
+            
+            .slide-image {
+                max-height: 45vh;
+            }
+        }
+        
+        /* Large screens and 4K displays */
+        @media (min-width: 1921px) {
+            .slide-title {
+                font-size: 4rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 2.5rem;
+            }
+            
+            .slide-text {
+                font-size: 1.8rem;
+                line-height: 2;
+            }
+            
+            .nav-btn, .center-btn {
+                padding: 20px 40px;
+                font-size: 1.5rem;
+            }
+            
+            #start-btn {
+                padding: 20px 50px;
+                font-size: 1.75rem;
+            }
+            
+            .municipality-text {
+                font-size: 1.75rem;
+            }
+        }
+        
+        /* Smart TVs and very large displays */
+        @media (min-width: 2561px) {
+            .slide-title {
+                font-size: 5rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 3rem;
+            }
+            
+            .slide-text {
+                font-size: 2.2rem;
+                line-height: 2.2;
+            }
+            
+            .nav-btn, .center-btn {
+                padding: 25px 50px;
+                font-size: 2rem;
+            }
+            
+            #start-btn {
+                padding: 25px 60px;
+                font-size: 2.25rem;
+            }
+            
+            .municipality-text {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <div class="text-center max-w-4xl px-4">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-[#6d5340]">Το Κάστρο της Καλλιθέας</h1>
+            <h2 class="text-2xl md:text-4xl font-light mb-8 text-[#8c6e5a]">Ένας Οχυρωμένος Θησαυρός της Θεσσαλίας</h2>
+            <p class="text-lg md:text-2xl mb-10 text-[#2c1810]">Μια διαδραστική περιήγηση στην αρχαία πόλη και την αμυντική της αρχιτεκτονική</p>
+            <button id="start-btn" class="text-lg">Έναρξη Παρουσίασης</button>
+        </div>
+    </div>
+
+    <!-- Πλαίσιο Διαφανειών (Slides Container) -->
+    <div id="presentation-container">
+
+        <!-- Διαφάνεια 1: Τίτλος -->
+        <div class="slide" data-page-index="1">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main text-center">
+                    <h1 class="text-6xl font-extrabold mb-8 text-[#6d5340]">Το Κάστρο της Καλλιθέας</h1>
+                    <h2 class="text-3xl font-light mb-12 text-[#8c6e5a]">Ένας Οχυρωμένος Θησαυρός της Θεσσαλίας</h2>
+                    <div class="mt-8">
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/cityWalls.jpg" 
+                             alt="Αρχαία οχύρωση - Τείχη του Κάστρου της Καλλιθέας" 
+                             class="slide-image mx-auto">
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-1" class="nav-btn" disabled>
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 1 / 11
+                        </span>
+                        <button id="next-btn-1" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 2: Εισαγωγή & Ταυτότητα -->
+        <div class="slide" data-page-index="2">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main">
+                    <h2 class="slide-title">Καλώς Ήλθατε στην Αρχαία Πόλη (Πεύμα;)</h2>
+                    <div class="flex flex-col md:flex-row items-center gap-8 mt-4">
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/peyma-2.jpg" 
+                             alt="Φωτογραφία ερειπίων αρχαίου τείχους" 
+                             class="slide-image w-full md:w-1/2 mx-auto">
+                        <div class="slide-text">
+                            <p class="mb-4">Το Κάστρο της Καλλιθέας είναι ένας από τους πιο καλά διατηρημένους οχυρωμένους οικισμούς της Θεσσαλίας.</p>
+                            <p class="mb-4 font-semibold text-[#8c6e5a]">Πιθανή Ταύτιση:</p>
+                            <ul class="slide-list">
+                                <li>Πιθανόν να ταυτίζεται με την αρχαία πόλη <strong>Πεύμα</strong>.</li>
+                                <li>Μας προσφέρει ένα σπάνιο παράθυρο στην <strong>Ελληνιστική</strong> και <strong>Κλασική</strong> εποχή.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-2" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 2 / 11
+                        </span>
+                        <button id="next-btn-2" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 3: Χρονολόγηση & Ακμή -->
+        <div class="slide" data-page-index="3">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main">
+                    <h2 class="slide-title">Κύρια Κατοίκηση & Ακμή</h2>
+                    <h3 class="slide-subtitle text-[#8c6e5a]">4ος έως 2ος αιώνας π.Χ.</h3>
+                    <div class="flex flex-col md:flex-row items-center gap-8 mt-4">
+                        <div class="slide-text w-full md:w-1/2">
+                            <p class="mb-4">Αυτή η περίοδος σηματοδοτεί τη μεγαλύτερη ακμή και ανάπτυξη της πόλης.</p>
+                            <p class="font-bold text-lg mb-2">Πολιτική Δομή:</p>
+                            <p>Η Καλλιθέα ανήκε στο <strong>Κοινό της Αχαΐας Φθιώτιδος</strong>, μια σημαντική συνομοσπονδία πόλεων της Θεσσαλίας, υπογραμμίζοντας τη στρατηγική της σημασία.</p>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/anaskafes.jpg" 
+                             alt="Ανασκαφές στο Κάστρο της Καλλιθέας" 
+                             class="slide-image w-full md:w-1/2 mx-auto">
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-3" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 3 / 11
+                        </span>
+                        <button id="next-btn-3" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 4: Η Περίμετρος -->
+        <div class="slide" data-page-index="4">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main">
+                    <h2 class="slide-title">Η Περίμετρος & Τα Τείχη</h2>
+                    <ul class="slide-text slide-list mt-8">
+                        <li class="mb-4">Η πόλη προστατευόταν από ένα εκτεταμένο τείχος.</li>
+                        <li class="mb-4">
+                            <span class="font-bold text-[#8c6e5a]">Συνολική Έκταση:</span> Περίπου <strong>340 στρέμματα</strong> βρίσκονται εντός των τειχών.
+                        </li>
+                        <li class="mb-4">
+                            <span class="font-bold text-[#8c6e5a]">Τεχνική Κατασκευής:</span> Τα τείχη είναι κτισμένα με ογκώδεις πέτρες, ακολουθώντας:
+                            <ul class="slide-list ml-8 mt-2 text-base">
+                                <li>Ισχυρές <strong>πολυγωνικές</strong> τεχνικές.</li>
+                                <li>Ή <strong>ισοδομικές</strong> τεχνικές (χαρακτηριστικές των μεγάλων οχυρωματικών έργων).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/cityWalls.jpg" 
+                         alt="Τείχη της πόλης Καλλιθέας" 
+                         class="slide-image w-full mt-8">
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-4" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 4 / 11
+                        </span>
+                        <button id="next-btn-4" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 5: Δομή Άμυνας - Πύργοι -->
+        <div class="slide" data-page-index="5">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main text-center">
+                    <h2 class="slide-title">Η Δομή Άμυνας: Οι Πύργοι</h2>
+                    <p class="slide-text mb-8">Η οχύρωση ήταν στρατηγικά ενισχυμένη με πύργους σε τακτά διαστήματα.</p>
+                    <div class="flex justify-center items-center">
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/walls.jpg" 
+                             alt="Αμυντικοί πύργοι και τείχη" 
+                             class="slide-image">
+                    </div>
+                    <p class="slide-text mt-8 text-[#8c6e5a]">Οι πύργοι χρησίμευαν για την εποπτεία της περιοχής και την αποτελεσματικότερη αντιμετώπιση οποιασδήποτε επίθεσης.</p>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-5" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 5 / 11
+                        </span>
+                        <button id="next-btn-5" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 6: Δομή Άμυνας - Ακρόπολη -->
+        <div class="slide" data-page-index="6">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main">
+                    <h2 class="slide-title">Η Δομή Άμυνας: Η Ακρόπολη</h2>
+                    <h3 class="slide-subtitle text-center text-[#8c6e5a]">Το τελευταίο καταφύγιο της πόλης</h3>
+                    <ul class="slide-text slide-list mt-8">
+                        <li class="mb-4">Βρίσκεται στο ψηλότερο σημείο του οικισμού.</li>
+                        <li class="mb-4">Αποτελεί το <strong>φυσικό και τελευταίο καταφύγιο</strong> σε περίπτωση πολιορκίας.</li>
+                        <li class="mb-4 font-semibold text-[#8c6e5a]">Είναι το <strong>αρχαιότερο τμήμα</strong> του οικισμού, γύρω από το οποίο αναπτύχθηκε ολόκληρη η πόλη.</li>
+                    </ul>
+                    <!-- Εικόνα αφαιρέθηκε από αυτή τη σελίδα -->
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-6" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 6 / 11
+                        </span>
+                        <button id="next-btn-6" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Διαφάνεια 7: Δομή Άμυνας - Πύλες -->
+        <div class="slide" data-page-index="7">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main text-center">
+                    <h2 class="slide-title">Πύλες & Έλεγχος Κυκλοφορίας</h2>
+                    <div class="flex justify-center items-center mb-8">
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/cutyEnter.jpg" 
+                             alt="Είσοδος της πόλης" 
+                             class="slide-image">
+                    </div>
+                    <p class="slide-text">Εντοπίζονται οι κύριες είσοδοι, όπως η Ανατολική και Δυτική Είσοδος της Ακρόπολης.</p>
+                    <p class="slide-text mt-4 font-semibold text-[#8c6e5a]">Οι πύλες επέτρεπαν την ελεγχόμενη επικοινωνία με τον έξω κόσμο και τον έλεγχο της κίνησης ατόμων και αγαθών.</p>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-7" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 7 / 11
+                        </span>
+                        <button id="next-btn-7" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 8: Μέσα στα Τείχη - Δημόσια Κτίρια -->
+        <div class="slide" data-page-index="8">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main">
+                    <h2 class="slide-title">Οργανωμένη Πόλη: Δημόσια Κτίρια</h2>
+                    <div class="slide-text mt-4">
+                        <p class="mb-4 font-semibold text-[#8c6e5a]">Η εξαιρετική διατήρηση του τείχους επιτρέπει την εύκολη διάκριση της διάταξης της αρχαίας πόλης (πολεοδομία):</p>
+                        <ul class="slide-list text-xl">
+                            <li class="mb-3">Διακρίνεται η οχύρωση της <strong>Ακρόπολης</strong>.</li>
+                            <li class="mb-3">Έχουν αποκαλυφθεί ίχνη της <strong>Αγοράς</strong> (το κέντρο της κοινωνικής και οικονομικής ζωής).</li>
+                            <li class="mb-3">Ίχνη ναών και άλλων σημαντικών <strong>δημοσίων κτιρίων</strong>.</li>
+                        </ul>
+                        <p class="mt-6 text-sm italic text-[#8c6e5a]">Τα τείχη δεν ήταν απλώς μια αμυντική γραμμή, αλλά σύμβολο της ισχύος και της οργάνωσης της πόλης.</p>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-8" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 8 / 11
+                        </span>
+                        <button id="next-btn-8" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 9: Μέσα στα Τείχη - Ιδιωτικές Οικίες -->
+        <div class="slide" data-page-index="9">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main">
+                    <h2 class="slide-title">Καθημερινή Ζωή: Το Κτήριο 10</h2>
+                    <div class="flex flex-col md:flex-row items-center gap-8 mt-4">
+                        <div class="slide-text w-full md:w-1/2">
+                            <p class="mb-4">Οι ανασκαφές έφεραν στο φως μεγάλα ιδιωτικά κτίρια.</p>
+                            <p class="font-semibold text-[#8c6e5a] mb-2">Το <strong>Κτήριο 10</strong>:</p>
+                            <ul class="slide-list">
+                                <li>Αποτελεί σημαντικό εύρημα για την κατανόηση της αρχιτεκτονικής.</li>
+                                <li>Μας έδωσε πληροφορίες για την <strong>καθημερινή ζωή</strong> και την <strong>οικονομία</strong> των κατοίκων της πόλης.</li>
+                            </ul>
+                            <p class="mt-4 text-sm italic">Έχουν γίνει αναπαραστάσεις για να φανεί η εσωτερική του διάταξη.</p>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/Ktirio10.jpg" 
+                             alt="Κτήριο 10 - αρχαία κατοικία" 
+                             class="slide-image w-full md:w-1/2 mx-auto">
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-9" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 9 / 11
+                        </span>
+                        <button id="next-btn-9" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 10: Συμπέρασμα -->
+        <div class="slide" data-page-index="10">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main text-center">
+                    <h2 class="slide-title">Συμπέρασμα</h2>
+                    <div class="flex justify-center mb-8">
+                        <img src="https://raw.githubusercontent.com/conchr/Kastro-Kallitheas/main/city.jpg" 
+                             alt="Συνολική άποψη του κάστρου" 
+                             class="slide-image w-full max-w-2xl">
+                    </div>
+                    <p class="slide-text mb-6">Το Κάστρο της Καλλιθέας αποτελεί ένα σημαντικό αρχαιολογικό μνημείο που προσφέρει πολύτιμες πληροφορίες για την αρχαία ελληνική οχυρωματική αρχιτεκτονική και την καθημερινή ζωή στην κλασική και ελληνιστική περίοδο.</p>
+                    <p class="slide-text text-[#8c6e5a]">Η μελέτη του συνεχίζει να αποκαλύπτει νέα στοιχεία για την ιστορία της Θεσσαλίας και της Ελλάδας.</p>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-10" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 10 / 11
+                        </span>
+                        <button id="next-btn-10" class="nav-btn">
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <div class="center-button">
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Διαφάνεια 11: Σελίδα Ευχαριστιών -->
+        <div class="slide" data-page-index="11">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="municipality-text">ΔΗΜΟΣ ΦΑΡΣΑΛΩΝ 2025</div>
+                </div>
+                <div class="slide-main text-center">
+                    <h2 class="slide-title">Σας Ευχαριστούμε που παρακολουθήσατε την παρουσίαση αυτή</h2>
+                    <div class="flex flex-col gap-6 mt-12 max-w-md mx-auto">
+                        <a href="https://conchr.github.io/Kastro-Quiz/" class="center-btn text-center">
+                            Θέλετε να κάνετε το κουιζ γνώσεων?
+                        </a>
+                        <button id="restart-btn" class="center-btn">
+                            Δείτε ξανά την Παρουσίαση
+                        </button>
+                        <a href="https://conchr.github.io/Farsala-Center-Page/" class="center-btn text-center">
+                            Κεντρική Σελίδα
+                        </a>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="nav-controls">
+                        <button id="prev-btn-11" class="nav-btn">
+                            &larr; Προηγούμενη
+                        </button>
+                        <span class="font-semibold text-lg text-[#6d5340]">
+                            Διαφάνεια 11 / 11
+                        </span>
+                        <button id="next-btn-11" class="nav-btn" disabled>
+                            Επόμενη &rarr;
+                        </button>
+                    </div>
+                    <!-- Κουμπί "Κεντρική Σελίδα" αφαιρέθηκε από αυτή τη σελίδα -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript για την Πλοήγηση -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const startBtn = document.getElementById('start-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentPage = 1;
+
+            // Start presentation
+            startBtn.addEventListener('click', () => {
+                welcomeScreen.style.opacity = '0';
+                setTimeout(() => {
+                    welcomeScreen.style.display = 'none';
+                    showSlide(1);
+                }, 800);
+            });
+
+            // Restart presentation
+            restartBtn.addEventListener('click', () => {
+                showSlide(1);
+            });
+
+            /**
+             * Εμφανίζει τη διαφάνεια με τον συγκεκριμένο δείκτη και ενημερώνει τα στοιχεία ελέγχου.
+             * @param {number} index - Ο δείκτης της διαφάνειας (1-based).
+             */
+            const showSlide = (index) => {
+                // Ασφάλεια ορίων
+                if (index < 1 || index > totalSlides) {
+                    return;
+                }
+
+                // Ενημέρωση τρέχουσας σελίδας
+                currentPage = index;
+
+                // Απόκρυψη όλων των διαφανειών
+                slides.forEach(slide => {
+                    slide.style.display = 'none';
+                    slide.style.opacity = '0';
+                });
+
+                // Εμφάνιση της τρέχουσας διαφάνειας
+                const currentSlide = document.querySelector(`.slide[data-page-index="${currentPage}"]`);
+                if (currentSlide) {
+                    currentSlide.style.display = 'flex';
+                    // Χρησιμοποιούμε setTimeout για να επιτρέψουμε στον browser να καταλάβει την αλλαγή του display πριν την μετάβαση opacity
+                    setTimeout(() => {
+                        currentSlide.style.opacity = '1';
+                    }, 10);
+                }
+                
+                // Ενημέρωση κατάστασης πλήκτρων για όλα τα slides
+                updateAllButtons();
+            };
+
+            const nextSlide = () => {
+                showSlide(currentPage + 1);
+            };
+
+            const prevSlide = () => {
+                showSlide(currentPage - 1);
+            };
+
+            // Function to update all navigation buttons
+            const updateAllButtons = () => {
+                for (let i = 1; i <= totalSlides; i++) {
+                    const prevBtn = document.getElementById(`prev-btn-${i}`);
+                    const nextBtn = document.getElementById(`next-btn-${i}`);
+                    
+                    if (prevBtn) {
+                        prevBtn.disabled = currentPage === 1;
+                    }
+                    
+                    if (nextBtn) {
+                        nextBtn.disabled = currentPage === totalSlides;
+                    }
+                }
+            };
+
+            // Add event listeners to all navigation buttons
+            for (let i = 1; i <= totalSlides; i++) {
+                const prevBtn = document.getElementById(`prev-btn-${i}`);
+                const nextBtn = document.getElementById(`next-btn-${i}`);
+                
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', prevSlide);
+                }
+                
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', nextSlide);
+                }
+            }
+
+            // Πλοήγηση με πληκτρολόγιο (Arrow Keys)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'Escape') {
+                    // Επιστροφή στην αρχική οθόνη
+                    welcomeScreen.style.display = 'flex';
+                    setTimeout(() => {
+                        welcomeScreen.style.opacity = '1';
+                    }, 10);
+                }
+            });
+
+            // Αρχική κατάσταση - δεν εμφανίζουμε καμία διαφάνεια
+            slides.forEach(slide => {
+                slide.style.display = 'none';
+                slide.style.opacity = '0';
+            });
+        });
+    </script>
+</body>
+</html>
